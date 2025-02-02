@@ -10,8 +10,9 @@
     "localdb:down": "docker-compose down",
     "test": "jest --config=jest.config.ts",
     "test:coverage": "jest --coverage --config=jest.config.ts",
-    "prettier:check": "prettier . --list-different",
-    "prettier:fix": "prettier --write .",
+    "prettier": "prettier . --ignore-unknown",
+    "prettier:check": "npm run prettier -- --check",
+    "prettier:fix": "npm run prettier -- --write --list-different",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky"
