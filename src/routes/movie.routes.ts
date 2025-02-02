@@ -26,7 +26,6 @@ export class MovieRouter {
   }
 
   private initializeRoutes() {
-    // En el método routes()
     this.router.post(
       '/movies',
       validate(moviePostSchema),
