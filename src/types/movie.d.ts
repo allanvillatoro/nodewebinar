@@ -1,0 +1,13 @@
+import { IMovieReview } from './movie.review';
+
+export interface IMovie {
+  movieId: string;
+  title: string;
+  year: number;
+  country: string;
+  createdDate?: Date;
+  updatedDate?: Date;
+}
+
+export type ITopFiveMovie = Pick<IMoview, 'movieId' | 'title' | 'year'> &
+  Pick<IMovieReview, 'rating'>;
