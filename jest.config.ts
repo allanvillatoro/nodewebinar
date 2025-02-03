@@ -7,6 +7,8 @@ const config: Config = {
   testMatch: ['**/tests/**/*.test.ts'],
   moduleFileExtensions: ['ts', 'js'],
   clearMocks: false,
+  collectCoverage: true,
+  coverageReporters: ['lcov', 'text'],
   collectCoverageFrom: [
     'src/**/*.{ts,js}',
     '!src/**/*.d.ts',
