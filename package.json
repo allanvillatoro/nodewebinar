@@ -15,7 +15,7 @@
     "prettier:fix": "npm run prettier -- --write --list-different",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
