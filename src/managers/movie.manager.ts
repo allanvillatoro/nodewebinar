@@ -71,7 +71,7 @@ export class MovieManager {
 
   async getReviewsByMovieId(movieId: string): Promise<IMovieReview[]> {
     const movie = await this.movieRepository.getById(movieId);
-   /*if (!movie) {
+    /*if (!movie) {
       throw new NotFoundError('Movie does not exist');
     }*/
     return this.movieReviewRepository.getByMovieId(movieId);
