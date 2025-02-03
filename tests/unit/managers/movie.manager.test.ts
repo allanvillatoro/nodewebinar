@@ -236,6 +236,9 @@ describe('MovieManager', () => {
           }
         }
       }
+      expect(
+        MovieReviewRepositoryMock.prototype.getByMovieId,
+      ).toHaveBeenCalledTimes(0);
     });
   });
 
