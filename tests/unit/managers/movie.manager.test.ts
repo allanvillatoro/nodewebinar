@@ -159,8 +159,9 @@ describe('MovieManager', () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
         return null;
       });
-      await expect(manager.addMovieReview(testMovieReview))
-      .rejects.toThrow(new NotFoundError('Movie does not exist'));
+      await expect(manager.addMovieReview(testMovieReview)).rejects.toThrow(
+        new NotFoundError('Movie does not exist'),
+      );
       expect(
         MovieReviewRepositoryMock.prototype.getByMovieId,
       ).toHaveBeenCalledTimes(0);
@@ -191,8 +192,9 @@ describe('MovieManager', () => {
           return null;
         },
       );
-      await expect(manager.getMovieReviewById(testMovieReviewId))
-      .rejects.toThrow(new NotFoundError('Movie review does not exist'));
+      await expect(
+        manager.getMovieReviewById(testMovieReviewId),
+      ).rejects.toThrow(new NotFoundError('Movie review does not exist'));
     });
   });
 
