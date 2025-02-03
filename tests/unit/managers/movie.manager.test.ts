@@ -1,6 +1,7 @@
 import { MovieManager } from '../../../src/managers/movie.manager';
 import { MovieRepository } from '../../../src/repositories/movie.repository';
 import { MovieReviewRepository } from '../../../src/repositories/movie.review.repository';
+import { NotFoundError } from '../../../src/types/error';
 import { IMovie } from '../../../src/types/movie';
 import { IMovieReview } from '../../../src/types/movie.review';
 import {
@@ -124,17 +125,12 @@ describe('MovieManager', () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
         return null;
       });
-      try {
-        await manager.getMovieById(testMovieId);
-      } catch (err) {
-        expect(err).toBeInstanceOf(Error);
-        if (err instanceof Error) {
-          expect(err.name).toBe('NotFoundError');
-          if ('status' in err) {
-            expect(err.status).toBe(404);
-          }
-        }
-      }
+      await expect(manager.getMovieById(testMovieId)).rejects.toThrow(
+        new NotFoundError('Movie does not exist'),
+      );
+      expect(
+        MovieReviewRepositoryMock.prototype.getAverageByMovieId,
+      ).toHaveBeenCalledTimes(0);
     });
   });
   describe('getAllMovies', () => {
@@ -163,17 +159,11 @@ describe('MovieManager', () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
         return null;
       });
-      try {
-        await manager.addMovieReview(testMovieReview);
-      } catch (err) {
-        expect(err).toBeInstanceOf(Error);
-        if (err instanceof Error) {
-          expect(err.name).toBe('NotFoundError');
-          if ('status' in err) {
-            expect(err.status).toBe(404);
-          }
-        }
-      }
+      await expect(manager.addMovieReview(testMovieReview))
+      .rejects.toThrow(new NotFoundError('Movie does not exist'));
+      expect(
+        MovieReviewRepositoryMock.prototype.getByMovieId,
+      ).toHaveBeenCalledTimes(0);
       expect(MovieReviewRepositoryMock.prototype.add).toHaveBeenCalledTimes(0);
     });
   });
@@ -201,17 +191,8 @@ describe('MovieManager', () => {
           return null;
         },
       );
-      try {
-        await manager.getMovieReviewById(testMovieReviewId);
-      } catch (err) {
-        expect(err).toBeInstanceOf(Error);
-        if (err instanceof Error) {
-          expect(err.name).toBe('NotFoundError');
-          if ('status' in err) {
-            expect(err.status).toBe(404);
-          }
-        }
-      }
+      await expect(manager.getMovieReviewById(testMovieReviewId))
+      .rejects.toThrow(new NotFoundError('Movie review does not exist'));
     });
   });
 
@@ -225,17 +206,9 @@ describe('MovieManager', () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
         return null;
       });
-      try {
-        await manager.getReviewsByMovieId(testMovieId);
-      } catch (err) {
-        expect(err).toBeInstanceOf(Error);
-        if (err instanceof Error) {
-          expect(err.name).toBe('NotFoundError');
-          if ('status' in err) {
-            expect(err.status).toBe(404);
-          }
-        }
-      }
+      await expect(manager.getReviewsByMovieId(testMovieId)).rejects.toThrow(
+        new NotFoundError('Movie does not exist'),
+      );
       expect(
         MovieReviewRepositoryMock.prototype.getByMovieId,
       ).toHaveBeenCalledTimes(0);
@@ -251,17 +224,12 @@ describe('MovieManager', () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
         return null;
       });
-      try {
-        await manager.deleteAllReviewsByMovieId(testMovieId);
-      } catch (err) {
-        expect(err).toBeInstanceOf(Error);
-        if (err instanceof Error) {
-          expect(err.name).toBe('NotFoundError');
-          if ('status' in err) {
-            expect(err.status).toBe(404);
-          }
-        }
-      }
+      await expect(
+        manager.deleteAllReviewsByMovieId(testMovieId),
+      ).rejects.toThrow(new NotFoundError('Movie does not exist'));
+      expect(
+        MovieReviewRepositoryMock.prototype.deleteAllByMovieId,
+      ).toHaveBeenCalledTimes(0);
     });
   });
 });
