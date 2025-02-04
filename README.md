@@ -23,11 +23,11 @@ $ npm ci
 
 ```bash
 
-# start database docker container
+# start postgres docker container
 $ npm run localdb:up
 
-# development
-$ npm run start:dev
+# start app locally
+$ npm run dev
 
 ```
 
