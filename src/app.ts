@@ -1,6 +1,5 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import { initializeDatabase } from './config/database';
 import { StatusCodes } from 'http-status-codes';
 import { MovieRouter } from './routes/movie.routes';
 import errorMiddleware from './middlewares/errorMiddleware';
@@ -13,7 +12,6 @@ class App {
     this.app = express();
     this.middleware();
     this.routes();
-    this.startDB();
     this.handleErrors();
   }
 
@@ -31,10 +29,6 @@ class App {
     this.app.use((req: Request, res: Response) => {
       res.status(StatusCodes.NOT_FOUND).send('Invalid route.');
     });
-  }
-
-  private async startDB() {
-    await initializeDatabase();
   }
 
   private handleErrors() {
