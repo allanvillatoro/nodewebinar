@@ -126,7 +126,7 @@ describe('MovieManager', () => {
         return null;
       });
       await expect(manager.getMovieById(testMovieId)).rejects.toThrow(
-        new NotFoundError('Movie does not exist'),
+        new NotFoundError(`Movie not found ${testMovieId}`),
       );
       expect(
         MovieReviewRepositoryMock.prototype.getAverageByMovieId,
@@ -160,7 +160,7 @@ describe('MovieManager', () => {
         return null;
       });
       await expect(manager.addMovieReview(testMovieReview)).rejects.toThrow(
-        new NotFoundError('Movie does not exist'),
+        new NotFoundError(`Movie not found ${testMovieId}`),
       );
       expect(
         MovieReviewRepositoryMock.prototype.getByMovieId,
@@ -194,7 +194,9 @@ describe('MovieManager', () => {
       );
       await expect(
         manager.getMovieReviewById(testMovieReviewId),
-      ).rejects.toThrow(new NotFoundError('Movie review does not exist'));
+      ).rejects.toThrow(
+        new NotFoundError(`Movie review not found ${testMovieReviewId}`),
+      );
     });
   });
 
@@ -209,7 +211,7 @@ describe('MovieManager', () => {
         return null;
       });
       await expect(manager.getReviewsByMovieId(testMovieId)).rejects.toThrow(
-        new NotFoundError('Movie does not exist'),
+        new NotFoundError(`Movie not found ${testMovieId}`),
       );
       expect(
         MovieReviewRepositoryMock.prototype.getByMovieId,
@@ -228,7 +230,7 @@ describe('MovieManager', () => {
       });
       await expect(
         manager.deleteAllReviewsByMovieId(testMovieId),
-      ).rejects.toThrow(new NotFoundError('Movie does not exist'));
+      ).rejects.toThrow(new NotFoundError(`Movie not found ${testMovieId}`));
       expect(
         MovieReviewRepositoryMock.prototype.deleteAllByMovieId,
       ).toHaveBeenCalledTimes(0);
