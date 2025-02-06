@@ -17,7 +17,7 @@ function errorMiddleware(
     console.error('Unhandled error:', err);
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error', error: err.message });
+      .json({ message: 'Internal Server Error', error: err?.message });
   }
 }
 
