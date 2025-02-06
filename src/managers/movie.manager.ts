@@ -31,7 +31,7 @@ export class MovieManager {
     movieId: string,
   ): Promise<IMovie & Pick<IMovieReview, 'rating'>> {
     const movie = await this.movieRepository.getById(movieId);
-    if (!movie) throw new NotFoundError('Movie does not exist');
+    if (!movie) throw new NotFoundError(`Movie not found ${movieId}`);
 
     const rating =
       await this.movieReviewRepository.getAverageByMovieId(movieId);
@@ -51,7 +51,7 @@ export class MovieManager {
   async addMovieReview(movieReviewData: IMovieReview): Promise<IMovieReview> {
     const movie = await this.movieRepository.getById(movieReviewData.movieId);
     if (!movie) {
-      throw new NotFoundError('Movie does not exist');
+      throw new NotFoundError(`Movie not found ${movieReviewData.movieId}`);
     }
     return this.movieReviewRepository.add(movieReviewData);
   }
@@ -65,14 +65,15 @@ export class MovieManager {
 
   async getMovieReviewById(movieReviewId: string): Promise<IMovieReview> {
     const result = await this.movieReviewRepository.getById(movieReviewId);
-    if (!result) throw new NotFoundError('Movie review does not exist');
+    if (!result)
+      throw new NotFoundError(`Movie review not found ${movieReviewId}`);
     return result;
   }
 
   async getReviewsByMovieId(movieId: string): Promise<IMovieReview[]> {
     const movie = await this.movieRepository.getById(movieId);
     if (!movie) {
-      throw new NotFoundError('Movie does not exist');
+      throw new NotFoundError(`Movie not found ${movieId}`);
     }
     return this.movieReviewRepository.getByMovieId(movieId);
   }
@@ -80,7 +81,7 @@ export class MovieManager {
   async deleteAllReviewsByMovieId(movieId: string): Promise<number> {
     const movie = await this.movieRepository.getById(movieId);
     if (!movie) {
-      throw new NotFoundError('Movie does not exist');
+      throw new NotFoundError(`Movie not found ${movieId}`);
     }
     return this.movieReviewRepository.deleteAllByMovieId(movieId);
   }

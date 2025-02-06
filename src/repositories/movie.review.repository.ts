@@ -21,7 +21,8 @@ export class MovieReviewRepository implements IMovieReviewRepository {
     updateData: Partial<IMovieReview>,
   ): Promise<IMovieReview> {
     const movieReview = await this.repository.findOneBy({ movieReviewId });
-    if (!movieReview) throw new NotFoundError('Movie does not exist');
+    if (!movieReview)
+      throw new NotFoundError(`Movie review not found ${movieReviewId}`);
     Object.assign(movieReview, {
       ...updateData,
       updatedDate: new Date(),

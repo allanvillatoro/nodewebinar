@@ -22,7 +22,7 @@ export class MovieRepository implements IMovieRepository {
 
   async update(movieId: string, movieData: Partial<IMovie>): Promise<IMovie> {
     const movie = await this.repository.findOneBy({ movieId });
-    if (!movie) throw new NotFoundError('Movie does not exist');
+    if (!movie) throw new NotFoundError(`Movie not found ${movieId}`);
     Object.assign(movie, {
       ...movieData,
       updatedDate: new Date(),
