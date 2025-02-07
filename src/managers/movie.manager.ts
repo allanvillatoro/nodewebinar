@@ -45,7 +45,7 @@ export class MovieManager {
   }
 
   async getTopFiveByRating(): Promise<ITopFiveMovie[]> {
-    return this.movieRepository.getTopFiveByRating();
+    return this.movieRepository.getAll();
   }
 
   async addMovieReview(movieReviewData: IMovieReview): Promise<IMovieReview> {
