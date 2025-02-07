@@ -105,6 +105,10 @@ describe('MovieManager', () => {
         },
       );
       const result = await manager.getMovieById(testMovieId);
+      expect(
+        MovieReviewRepositoryMock.prototype.getAverageByMovieId,
+      ).toHaveBeenCalledTimes(1);
+      expect(MovieRepositoryMock.prototype.getById).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual({
         ...testMovie,
         rating: 4.5,
@@ -117,9 +121,8 @@ describe('MovieManager', () => {
         },
       );
       const result = await manager.getMovieById(testMovieId);
-      expect(result).toStrictEqual({
-        ...testMovie,
-      });
+      expect(MovieRepositoryMock.prototype.getById).toHaveBeenCalledTimes(1);
+      expect(result).toStrictEqual(testMovie);
     });
     test('should throw 404 error if movie does not exist', async () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
@@ -136,6 +139,7 @@ describe('MovieManager', () => {
   describe('getAllMovies', () => {
     test('should get all the movies', async () => {
       const result = await manager.getAllMovies();
+      expect(MovieRepositoryMock.prototype.getAll).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual(testMovieList);
       expect(result.length).toBe(testMovieList.length);
     });
@@ -143,6 +147,9 @@ describe('MovieManager', () => {
   describe('getTopFiveByRating', () => {
     test('should get top five movies', async () => {
       const result = await manager.getTopFiveByRating();
+      expect(
+        MovieRepositoryMock.prototype.getTopFiveByRating,
+      ).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual(testMovieList);
       expect(result.length).toBe(testMovieList.length);
     });
@@ -184,6 +191,9 @@ describe('MovieManager', () => {
   describe('getMovieReviewById', () => {
     test('should get movie review', async () => {
       const result = await manager.getMovieReviewById(testMovieReviewId);
+      expect(MovieReviewRepositoryMock.prototype.getById).toHaveBeenCalledTimes(
+        1,
+      );
       expect(result).toStrictEqual(testMovieReview);
     });
     test('should throw 404 error if movie review does not exist', async () => {
@@ -203,6 +213,9 @@ describe('MovieManager', () => {
   describe('getReviewsByMovieId', () => {
     test('should get reviews by movie', async () => {
       const result = await manager.getReviewsByMovieId(testMovieId);
+      expect(
+        MovieReviewRepositoryMock.prototype.getByMovieId,
+      ).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual(testMovieReviewList);
       expect(result.length).toBe(testMovieReviewList.length);
     });
@@ -222,6 +235,9 @@ describe('MovieManager', () => {
   describe('deleteAllReviewsByMovieId', () => {
     test('should delete movie reviews', async () => {
       const result = await manager.deleteAllReviewsByMovieId(testMovieId);
+      expect(
+        MovieReviewRepositoryMock.prototype.deleteAllByMovieId,
+      ).toHaveBeenCalledTimes(1);
       expect(result).toStrictEqual(testMovieReviewList.length);
     });
     test('should throw 404 error if movie does not exist', async () => {
