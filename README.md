@@ -40,3 +40,26 @@ $ npm run test
 # test coverage
 $ npm run test:coverage
 ```
+
+## About the application
+
+This application allows you to create a movie database. Anonymous uses can review every movie with a rating and comments.
+
+### Routes:
+
+1. **Movies:**
+
+   - **POST `/movies`**: To add a new movie.
+   - **PUT `/movies/:movieId`**: To update an existing movie.
+   - **GET `/movies/top-five`**: To get the top 5 highest-rated movies.
+   - **GET `/movies/:movieId`**: To get a movie by its ID.
+   - **GET `/movies`**: To get all movies.
+
+2. **Movie Reviews:**
+   - **POST `/movies/reviews`**: To add a new review for a movie.
+   - **PUT `/movies/reviews/:movieReviewId`**: To update an existing review.
+   - **GET `/movies/reviews/:movieReviewId`**: To get a review by its ID.
+   - **GET `/movies/:movieId/reviews`**: To get all reviews for a specific movie.
+   - **DELETE `/movies/:movieId/reviews`**: To delete all reviews for a specific movie.
+
+[Check Postman documentation](https://documenter.getpostman.com/view/818109/2sAYX9ogPD)
