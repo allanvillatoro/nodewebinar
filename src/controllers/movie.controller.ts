@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { MovieManager } from '../managers/movie.manager';
@@ -10,10 +9,10 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const savedMovie = await this.movieManager.addMovie(req.body);
-      return res.status(StatusCodes.CREATED).json(savedMovie);
+      res.status(StatusCodes.CREATED).json(savedMovie);
     } catch (error) {
       next(error);
     }
@@ -23,12 +22,12 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const { movieId } = req.params;
       const updatedData = req.body;
       const movie = await this.movieManager.updateMovie(movieId, updatedData);
-      return res.status(StatusCodes.OK).json(movie);
+      res.status(StatusCodes.OK).json(movie);
     } catch (error) {
       next(error);
     }
@@ -38,10 +37,10 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const movies = await this.movieManager.getTopFiveByRating();
-      return res.status(StatusCodes.OK).json(movies);
+      res.status(StatusCodes.OK).json(movies);
     } catch (error) {
       next(error);
     }
@@ -51,11 +50,11 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const { movieId } = req.params;
       const movie = await this.movieManager.getMovieById(movieId);
-      return res.status(StatusCodes.OK).json(movie);
+      res.status(StatusCodes.OK).json(movie);
     } catch (error) {
       next(error);
     }
@@ -65,10 +64,10 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const movies = await this.movieManager.getAllMovies();
-      return res.status(StatusCodes.OK).json(movies);
+      res.status(StatusCodes.OK).json(movies);
     } catch (error) {
       next(error);
     }
@@ -78,10 +77,10 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const savedMovie = await this.movieManager.addMovieReview(req.body);
-      return res.status(StatusCodes.CREATED).json(savedMovie);
+      res.status(StatusCodes.CREATED).json(savedMovie);
     } catch (error) {
       next(error);
     }
@@ -91,7 +90,7 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const { movieReviewId } = req.params;
       const updatedData = req.body;
@@ -99,7 +98,7 @@ export class MovieController {
         movieReviewId,
         updatedData,
       );
-      return res.status(StatusCodes.OK).json(movie);
+      res.status(StatusCodes.OK).json(movie);
     } catch (error) {
       next(error);
     }
@@ -109,11 +108,11 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const { movieReviewId } = req.params;
       const review = await this.movieManager.getMovieReviewById(movieReviewId);
-      return res.status(StatusCodes.OK).json(review);
+      res.status(StatusCodes.OK).json(review);
     } catch (error) {
       next(error);
     }
@@ -123,11 +122,11 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const { movieId } = req.params;
       const reviews = await this.movieManager.getReviewsByMovieId(movieId);
-      return res.status(StatusCodes.OK).json(reviews);
+      res.status(StatusCodes.OK).json(reviews);
     } catch (error) {
       next(error);
     }
@@ -137,12 +136,12 @@ export class MovieController {
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const { movieId } = req.params;
       const deletedReviews =
         await this.movieManager.deleteAllReviewsByMovieId(movieId);
-      return res.status(StatusCodes.OK).json({ deletedReviews });
+      res.status(StatusCodes.OK).json({ deletedReviews });
     } catch (error) {
       next(error);
     }
