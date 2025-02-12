@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { MovieManager } from '../managers/movie.manager';
+import { IMovie } from '../types/movie';
+import { IMovieReview } from '../types/movie.review';
 
 export class MovieController {
   constructor(private movieManager: MovieManager) {}
 
   addMovie = async (
-    req: Request,
+    req: Request<unknown, unknown, Partial<IMovie>>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -19,7 +21,7 @@ export class MovieController {
   };
 
   updateMovie = async (
-    req: Request,
+    req: Request<{ movieId: string }, unknown, Partial<IMovie>>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -47,7 +49,7 @@ export class MovieController {
   };
 
   getMovieById = async (
-    req: Request,
+    req: Request<{ movieId: string }>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -74,7 +76,7 @@ export class MovieController {
   };
 
   addMovieReview = async (
-    req: Request,
+    req: Request<unknown, unknown, Partial<IMovieReview>>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -87,7 +89,7 @@ export class MovieController {
   };
 
   updateMovieReview = async (
-    req: Request,
+    req: Request<{ movieReviewId: string }, unknown, Partial<IMovieReview>>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -105,7 +107,7 @@ export class MovieController {
   };
 
   getMovieReviewById = async (
-    req: Request,
+    req: Request<{ movieReviewId: string }>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -119,7 +121,7 @@ export class MovieController {
   };
 
   getReviewsByMovieId = async (
-    req: Request,
+    req: Request<{ movieId: string }>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {
@@ -133,7 +135,7 @@ export class MovieController {
   };
 
   deleteAllReviewsByMovieId = async (
-    req: Request,
+    req: Request<{ movieId: string }>,
     res: Response,
     next: NextFunction,
   ): Promise<void> => {

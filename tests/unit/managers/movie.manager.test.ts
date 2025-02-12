@@ -1,7 +1,7 @@
 import { MovieManager } from '../../../src/managers/movie.manager';
 import { MovieRepository } from '../../../src/repositories/movie.repository';
 import { MovieReviewRepository } from '../../../src/repositories/movie.review.repository';
-import { NotFoundError } from '../../../src/types/error';
+import { BadRequestError, NotFoundError } from '../../../src/types/error';
 import { IMovie } from '../../../src/types/movie';
 import { IMovieReview } from '../../../src/types/movie.review';
 import {
@@ -161,6 +161,16 @@ describe('MovieManager', () => {
       expect(MovieReviewRepositoryMock.prototype.add).toHaveBeenCalledWith(
         testMovieReview,
       );
+    });
+    test('should throw 400 error if movie id is not provided', async () => {
+      const testMovieReview = {
+        rating: 5,
+        review: 'Great movie',
+      };
+      await expect(manager.addMovieReview(testMovieReview)).rejects.toThrow(
+        new BadRequestError(`Invalid movieId`),
+      );
+      expect(MovieReviewRepositoryMock.prototype.add).toHaveBeenCalledTimes(0);
     });
     test('should throw 404 error if movie does not exist', async () => {
       MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
