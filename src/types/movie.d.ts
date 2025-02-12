@@ -11,3 +11,5 @@ export interface IMovie {
 
 export type ITopFiveMovie = Pick<IMoview, 'movieId' | 'title' | 'year'> &
   Pick<IMovieReview, 'rating'>;
+
+export type IMovieWithRating = IMovie & Pick<IMovieReview, 'rating'>;

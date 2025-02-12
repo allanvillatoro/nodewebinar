@@ -1,5 +1,5 @@
 import { BadRequestError, NotFoundError } from '../types/error';
-import { IMovie, ITopFiveMovie } from '../types/movie';
+import { IMovie, IMovieWithRating, ITopFiveMovie } from '../types/movie';
 import { IMovieRepository } from '../types/movie.repository';
 import { IMovieReview } from '../types/movie.review';
 import { IMovieReviewRepository } from '../types/movie.review.repository';
@@ -27,9 +27,7 @@ export class MovieManager {
     return this.movieRepository.update(movieId, movieData);
   }
 
-  async getMovieById(
-    movieId: string,
-  ): Promise<IMovie & Pick<IMovieReview, 'rating'>> {
+  async getMovieById(movieId: string): Promise<IMovieWithRating> {
     const movie = await this.movieRepository.getById(movieId);
     if (!movie) throw new NotFoundError(`Movie not found ${movieId}`);
 

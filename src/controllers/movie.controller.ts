@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { MovieManager } from '../managers/movie.manager';
-import { IMovie } from '../types/movie';
+import { IMovie, IMovieWithRating, ITopFiveMovie } from '../types/movie';
 import { IMovieReview } from '../types/movie.review';
 
 export class MovieController {
@@ -9,7 +9,7 @@ export class MovieController {
 
   addMovie = async (
     req: Request<unknown, unknown, Partial<IMovie>>,
-    res: Response,
+    res: Response<IMovie>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -22,7 +22,7 @@ export class MovieController {
 
   updateMovie = async (
     req: Request<{ movieId: string }, unknown, Partial<IMovie>>,
-    res: Response,
+    res: Response<IMovie>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -37,7 +37,7 @@ export class MovieController {
 
   getTopFiveByRating = async (
     req: Request,
-    res: Response,
+    res: Response<ITopFiveMovie[]>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -50,7 +50,7 @@ export class MovieController {
 
   getMovieById = async (
     req: Request<{ movieId: string }>,
-    res: Response,
+    res: Response<IMovieWithRating>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -64,7 +64,7 @@ export class MovieController {
 
   getAllMovies = async (
     req: Request,
-    res: Response,
+    res: Response<IMovie[]>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -77,7 +77,7 @@ export class MovieController {
 
   addMovieReview = async (
     req: Request<unknown, unknown, Partial<IMovieReview>>,
-    res: Response,
+    res: Response<IMovieReview>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -90,7 +90,7 @@ export class MovieController {
 
   updateMovieReview = async (
     req: Request<{ movieReviewId: string }, unknown, Partial<IMovieReview>>,
-    res: Response,
+    res: Response<IMovieReview>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -108,7 +108,7 @@ export class MovieController {
 
   getMovieReviewById = async (
     req: Request<{ movieReviewId: string }>,
-    res: Response,
+    res: Response<IMovieReview>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -122,7 +122,7 @@ export class MovieController {
 
   getReviewsByMovieId = async (
     req: Request<{ movieId: string }>,
-    res: Response,
+    res: Response<IMovieReview[]>,
     next: NextFunction,
   ): Promise<void> => {
     try {
@@ -136,7 +136,7 @@ export class MovieController {
 
   deleteAllReviewsByMovieId = async (
     req: Request<{ movieId: string }>,
-    res: Response,
+    res: Response<{ deletedReviews: number }>,
     next: NextFunction,
   ): Promise<void> => {
     try {
