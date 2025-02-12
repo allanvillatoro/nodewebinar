@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Type-check
+      - name: Run type-check
         run: npm run build
 
       - name: Run linter (ESLint)
