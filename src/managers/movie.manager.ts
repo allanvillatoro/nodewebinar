@@ -49,7 +49,8 @@ export class MovieManager {
   async addMovieReview(
     movieReviewData: Partial<IMovieReview>,
   ): Promise<IMovieReview> {
-    if (!movieReviewData.movieId) throw new BadRequestError(`Invalid movieId`);
+    if (!movieReviewData.movieId)
+      throw new BadRequestError(`movieId is required`);
     const movie = await this.movieRepository.getById(movieReviewData.movieId);
     if (!movie) {
       throw new NotFoundError(`Movie not found ${movieReviewData.movieId}`);

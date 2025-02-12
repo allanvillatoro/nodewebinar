@@ -168,7 +168,7 @@ describe('MovieManager', () => {
         review: 'Great movie',
       };
       await expect(manager.addMovieReview(testMovieReview)).rejects.toThrow(
-        new BadRequestError(`Invalid movieId`),
+        new BadRequestError(`movieId is required`),
       );
       expect(MovieReviewRepositoryMock.prototype.add).toHaveBeenCalledTimes(0);
     });
