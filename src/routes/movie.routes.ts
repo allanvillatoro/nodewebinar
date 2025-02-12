@@ -32,47 +32,44 @@ export class MovieRouter {
     this.router.post(
       this.baseRoute,
       validate(moviePostSchema),
-      this.movieController.addMovie.bind(this.movieController),
+      this.movieController.addMovie,
     );
     this.router.put(
       `${this.baseRoute}/:movieId`,
       validate(movieGetSchema, 'params'),
       validate(moviePutSchema),
-      this.movieController.updateMovie.bind(this.movieController),
+      this.movieController.updateMovie,
     );
     this.router.get(
       `${this.baseRoute}/topfive`,
-      this.movieController.getTopFiveByRating.bind(this.movieController),
+      this.movieController.getTopFiveByRating,
     );
     this.router.get(
       `${this.baseRoute}/:movieId`,
       validate(movieGetSchema, 'params'),
-      this.movieController.getMovieById.bind(this.movieController),
+      this.movieController.getMovieById,
     );
-    this.router.get(
-      this.baseRoute,
-      this.movieController.getAllMovies.bind(this.movieController),
-    );
+    this.router.get(this.baseRoute, this.movieController.getAllMovies);
 
     // Movie Reviews
 
     this.router.post(
       `${this.baseRoute}/reviews`,
       validate(movieReviewPostSchema),
-      this.movieController.addMovieReview.bind(this.movieController),
+      this.movieController.addMovieReview,
     );
 
     this.router.put(
       `${this.baseRoute}/reviews/:movieReviewId`,
       validate(movieReviewGetSchema, 'params'),
       validate(movieReviewPutSchema),
-      this.movieController.updateMovieReview.bind(this.movieController),
+      this.movieController.updateMovieReview,
     );
 
     this.router.get(
       `${this.baseRoute}/reviews/:movieReviewId`,
       validate(movieReviewGetSchema, 'params'),
-      this.movieController.getMovieReviewById.bind(this.movieController),
+      this.movieController.getMovieReviewById,
     );
 
     // Reviews by Movie
@@ -80,13 +77,13 @@ export class MovieRouter {
     this.router.get(
       `${this.baseRoute}/:movieId/reviews`,
       validate(movieGetSchema, 'params'),
-      this.movieController.getReviewsByMovieId.bind(this.movieController),
+      this.movieController.getReviewsByMovieId,
     );
 
     this.router.delete(
       `${this.baseRoute}/:movieId/reviews`,
       validate(movieGetSchema, 'params'),
-      this.movieController.deleteAllReviewsByMovieId.bind(this.movieController),
+      this.movieController.deleteAllReviewsByMovieId,
     );
   }
 

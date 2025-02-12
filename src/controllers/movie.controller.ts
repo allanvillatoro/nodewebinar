@@ -5,24 +5,24 @@ import { MovieManager } from '../managers/movie.manager';
 export class MovieController {
   constructor(private movieManager: MovieManager) {}
 
-  async addMovie(
+  addMovie = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const savedMovie = await this.movieManager.addMovie(req.body);
       res.status(StatusCodes.CREATED).json(savedMovie);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async updateMovie(
+  updateMovie = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { movieId } = req.params;
       const updatedData = req.body;
@@ -31,26 +31,26 @@ export class MovieController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async getTopFiveByRating(
+  getTopFiveByRating = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const movies = await this.movieManager.getTopFiveByRating();
       res.status(StatusCodes.OK).json(movies);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async getMovieById(
+  getMovieById = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { movieId } = req.params;
       const movie = await this.movieManager.getMovieById(movieId);
@@ -58,39 +58,39 @@ export class MovieController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async getAllMovies(
+  getAllMovies = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const movies = await this.movieManager.getAllMovies();
       res.status(StatusCodes.OK).json(movies);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async addMovieReview(
+  addMovieReview = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const savedMovie = await this.movieManager.addMovieReview(req.body);
       res.status(StatusCodes.CREATED).json(savedMovie);
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async updateMovieReview(
+  updateMovieReview = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { movieReviewId } = req.params;
       const updatedData = req.body;
@@ -102,13 +102,13 @@ export class MovieController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async getMovieReviewById(
+  getMovieReviewById = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { movieReviewId } = req.params;
       const review = await this.movieManager.getMovieReviewById(movieReviewId);
@@ -116,13 +116,13 @@ export class MovieController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async getReviewsByMovieId(
+  getReviewsByMovieId = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { movieId } = req.params;
       const reviews = await this.movieManager.getReviewsByMovieId(movieId);
@@ -130,13 +130,13 @@ export class MovieController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
-  async deleteAllReviewsByMovieId(
+  deleteAllReviewsByMovieId = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { movieId } = req.params;
       const deletedReviews =
@@ -145,5 +145,5 @@ export class MovieController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }
