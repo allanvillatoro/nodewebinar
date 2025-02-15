@@ -41,6 +41,8 @@ $ npm run test
 $ npm run test:coverage
 ```
 
+[Check Unit Testing Handbook](./docs/UNIT_TESTS.md)
+
 ## About the application
 
 This application allows you to create a movie database. Anonymous uses can review every movie with a rating and comments.

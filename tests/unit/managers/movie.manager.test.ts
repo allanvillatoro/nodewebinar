@@ -22,11 +22,7 @@ const MovieRepositoryMock = MovieRepository as jest.Mock;
 const MovieReviewRepositoryMock = MovieReviewRepository as jest.Mock;
 let manager: MovieManager;
 
-beforeAll(() => {});
-
-beforeEach(() => {
-  jest.clearAllMocks();
-
+beforeAll(() => {
   MovieRepositoryMock.prototype.add.mockImplementation(async () => {
     return {} as IMovie;
   });
@@ -35,8 +31,12 @@ beforeEach(() => {
     return {} as IMovie;
   });
 
-  MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
-    return testMovie;
+  MovieReviewRepositoryMock.prototype.add.mockImplementation(async () => {
+    return {} as IMovieReview;
+  });
+
+  MovieReviewRepositoryMock.prototype.update.mockImplementation(async () => {
+    return {} as IMovieReview;
   });
 
   MovieRepositoryMock.prototype.getAll.mockImplementation(async () => {
@@ -48,18 +48,6 @@ beforeEach(() => {
       return testMovieList;
     },
   );
-
-  MovieReviewRepositoryMock.prototype.add.mockImplementation(async () => {
-    return {} as IMovieReview;
-  });
-
-  MovieReviewRepositoryMock.prototype.update.mockImplementation(async () => {
-    return {} as IMovieReview;
-  });
-
-  MovieReviewRepositoryMock.prototype.getById.mockImplementation(async () => {
-    return testMovieReview;
-  });
 
   MovieReviewRepositoryMock.prototype.getByMovieId.mockImplementation(
     async () => {
@@ -77,6 +65,18 @@ beforeEach(() => {
     MovieRepositoryMock.prototype,
     MovieReviewRepositoryMock.prototype,
   );
+});
+
+beforeEach(() => {
+  jest.clearAllMocks();
+
+  MovieRepositoryMock.prototype.getById.mockImplementation(async () => {
+    return testMovie;
+  });
+
+  MovieReviewRepositoryMock.prototype.getById.mockImplementation(async () => {
+    return testMovieReview;
+  });
 });
 
 describe('MovieManager', () => {
