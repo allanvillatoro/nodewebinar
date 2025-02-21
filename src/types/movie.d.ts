@@ -3,8 +3,8 @@ import { IMovieReview } from './movie.review';
 export interface IMovie {
   movieId: string;
   title: string;
-  year: number;
-  country: string;
+  year: number | null;
+  country: string | null;
   createdDate?: Date;
   updatedDate?: Date;
 }

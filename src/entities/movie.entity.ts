@@ -13,9 +13,9 @@ import { MovieReview } from './movie.review.entity';
 
 @Entity('movies')
 export class Movie {
-  constructor(data: IMovie) {
+  constructor(data: Partial<IMovie>) {
     this.movieId = data?.movieId ?? uuidv7();
-    this.title = data?.title;
+    this.title = data?.title ?? '';
     this.year = data?.year ?? null;
     this.country = data?.country ?? null;
     this.createdDate = data?.createdDate ?? new Date();
@@ -29,10 +29,10 @@ export class Movie {
   title: string;
 
   @Column('int', { nullable: true })
-  year: number;
+  year: number | null;
 
   @Column('text', { nullable: true })
-  country: string;
+  country: string | null;
 
   @OneToMany(() => MovieReview, (movieReview) => movieReview.movie)
   movieReviews!: MovieReview[];

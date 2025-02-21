@@ -8,9 +8,7 @@ export class MovieReviewRepository implements IMovieReviewRepository {
   private repository = AppDataSource.getRepository(MovieReview);
 
   async add(movieReviewData: Partial<IMovieReview>): Promise<IMovieReview> {
-    return this.repository.save(
-      new MovieReview(movieReviewData as IMovieReview),
-    );
+    return this.repository.save(new MovieReview(movieReviewData));
   }
 
   async update(
@@ -37,6 +35,7 @@ export class MovieReviewRepository implements IMovieReviewRepository {
         movieReviewId: true,
         rating: true,
         review: true,
+        movieId: true,
         createdDate: true,
         updatedDate: true,
       },

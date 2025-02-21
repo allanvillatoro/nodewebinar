@@ -14,10 +14,10 @@ import { IMovieReview } from '../types/movie.review';
 
 @Entity('movie_reviews')
 export class MovieReview {
-  constructor(data: IMovieReview) {
+  constructor(data: Partial<IMovieReview>) {
     this.movieReviewId = data?.movieReviewId ?? uuidv7();
-    this.movieId = data?.movieId;
-    this.rating = data?.rating;
+    this.movieId = data?.movieId ?? '';
+    this.rating = data?.rating ?? 1;
     this.review = data?.review ?? null;
     this.createdDate = data?.createdDate ?? new Date();
     this.updatedDate = data?.updatedDate ?? new Date();
@@ -37,7 +37,7 @@ export class MovieReview {
   rating: number;
 
   @Column('text', { nullable: true })
-  review: string;
+  review: string | null;
 
   @CreateDateColumn({ name: 'created_date', type: 'timestamp' })
   createdDate: Date;
