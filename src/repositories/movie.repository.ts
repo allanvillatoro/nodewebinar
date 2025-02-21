@@ -13,11 +13,7 @@ export class MovieRepository implements IMovieRepository {
   }
 
   async add(movieData: Partial<IMovie>): Promise<IMovie> {
-    return this.repository.save({
-      ...movieData,
-      createdDate: new Date(),
-      updatedDate: new Date(),
-    });
+    return this.repository.save(new Movie(movieData as IMovie));
   }
 
   async update(movieId: string, movieData: Partial<IMovie>): Promise<IMovie> {
