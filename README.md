@@ -53,7 +53,7 @@ This application allows you to create a movie database. Anonymous uses can revie
 
    - **POST `/movies`**: To add a new movie.
    - **PUT `/movies/:movieId`**: To update an existing movie.
-   - **GET `/movies/top-five`**: To get the top 5 highest-rated movies.
+   - **GET `/movies/topfive`**: To get the top 5 highest-rated movies.
    - **GET `/movies/:movieId`**: To get a movie by its ID.
    - **GET `/movies`**: To get all movies.
 
