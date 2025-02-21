@@ -5,15 +5,16 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BeforeInsert,
 } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { v7 as uuidv7 } from 'uuid';
 import { IMovie } from '../types/movie';
 import { MovieReview } from './movie.review.entity';
 
 @Entity('movies')
 export class Movie {
   constructor(data: IMovie) {
-    this.movieId = data?.movieId ?? uuidv4();
+    this.movieId = data?.movieId ?? uuidv7();
     this.title = data?.title;
     this.year = data?.year ?? null;
     this.country = data?.country ?? null;
@@ -41,4 +42,9 @@ export class Movie {
 
   @UpdateDateColumn({ name: 'updated_date', type: 'timestamp' })
   updatedDate: Date;
+
+  @BeforeInsert()
+  generateUuid() {
+    this.movieId = uuidv7();
+  }
 }
