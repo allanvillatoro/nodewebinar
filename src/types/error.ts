@@ -22,6 +22,12 @@ export class NotFoundError extends ExtendedError {
   }
 }
 
+export class ConflictError extends ExtendedError {
+  constructor(message: string) {
+    super('ConflictError', StatusCodes.CONFLICT, message);
+  }
+}
+
 export class InternalServerError extends ExtendedError {
   constructor(message: string) {
     super('InternalServerError', StatusCodes.INTERNAL_SERVER_ERROR, message);

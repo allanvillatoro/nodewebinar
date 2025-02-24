@@ -1,4 +1,4 @@
-import { BadRequestError, NotFoundError } from '../types/error';
+import { BadRequestError, ConflictError, NotFoundError } from '../types/error';
 import { IMovie, IMovieWithRating, ITopFiveMovie } from '../types/movie';
 import { IMovieRepository } from '../types/movie.repository';
 import { IMovieReview } from '../types/movie.review';
@@ -17,6 +17,10 @@ export class MovieManager {
   }
 
   async addMovie(movieData: Partial<IMovie>): Promise<IMovie> {
+    const foundMovie = await this.movieRepository.getByTitle(movieData.title!);
+    if (foundMovie) {
+      throw new ConflictError(`${movieData.title} movie already exists`);
+    }
     return this.movieRepository.add(movieData);
   }
 

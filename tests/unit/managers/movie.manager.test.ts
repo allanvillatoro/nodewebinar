@@ -1,7 +1,11 @@
 import { MovieManager } from '../../../src/managers/movie.manager';
 import { MovieRepository } from '../../../src/repositories/movie.repository';
 import { MovieReviewRepository } from '../../../src/repositories/movie.review.repository';
-import { BadRequestError, NotFoundError } from '../../../src/types/error';
+import {
+  BadRequestError,
+  ConflictError,
+  NotFoundError,
+} from '../../../src/types/error';
 import { IMovie } from '../../../src/types/movie';
 import { IMovieReview } from '../../../src/types/movie.review';
 import {
@@ -31,14 +35,6 @@ beforeAll(() => {
     return {} as IMovie;
   });
 
-  MovieReviewRepositoryMock.prototype.add.mockImplementation(async () => {
-    return {} as IMovieReview;
-  });
-
-  MovieReviewRepositoryMock.prototype.update.mockImplementation(async () => {
-    return {} as IMovieReview;
-  });
-
   MovieRepositoryMock.prototype.getAll.mockImplementation(async () => {
     return testMovieList;
   });
@@ -48,6 +44,14 @@ beforeAll(() => {
       return testMovieList;
     },
   );
+
+  MovieReviewRepositoryMock.prototype.add.mockImplementation(async () => {
+    return {} as IMovieReview;
+  });
+
+  MovieReviewRepositoryMock.prototype.update.mockImplementation(async () => {
+    return {} as IMovieReview;
+  });
 
   MovieReviewRepositoryMock.prototype.getByMovieId.mockImplementation(
     async () => {
@@ -74,6 +78,10 @@ beforeEach(() => {
     return testMovie;
   });
 
+  MovieRepositoryMock.prototype.getByTitle.mockImplementation(async () => {
+    return null;
+  });
+
   MovieReviewRepositoryMock.prototype.getById.mockImplementation(async () => {
     return testMovieReview;
   });
@@ -85,6 +93,15 @@ describe('MovieManager', () => {
       await manager.addMovie(testMovie);
       expect(MovieRepositoryMock.prototype.add).toHaveBeenCalledTimes(1);
       expect(MovieRepositoryMock.prototype.add).toHaveBeenCalledWith(testMovie);
+    });
+    test('should throw 409 error if movie title already exists', async () => {
+      MovieRepositoryMock.prototype.getByTitle.mockImplementation(async () => {
+        return {} as IMovie;
+      });
+      await expect(manager.addMovie(testMovie)).rejects.toThrow(
+        new ConflictError(`${testMovie.title} movie already exists`),
+      );
+      expect(MovieRepositoryMock.prototype.add).toHaveBeenCalledTimes(0);
     });
   });
   describe('updateMovie', () => {

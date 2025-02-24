@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  BeforeInsert,
 } from 'typeorm';
 import { v7 as uuidv7 } from 'uuid';
 import { Movie } from './movie.entity';
@@ -44,9 +43,4 @@ export class MovieReview {
 
   @UpdateDateColumn({ name: 'updated_date', type: 'timestamp' })
   updatedDate: Date;
-
-  @BeforeInsert()
-  generateUuid() {
-    this.movieReviewId = uuidv7();
-  }
 }

@@ -29,6 +29,10 @@ beforeAll(() => {
     return {} as IMovie;
   });
 
+  MovieRepositoryMock.prototype.getByTitle.mockImplementation(async () => {
+    return null;
+  });
+
   MovieRepositoryMock.prototype.getAll.mockImplementation(async () => {
     return testMovieList;
   });

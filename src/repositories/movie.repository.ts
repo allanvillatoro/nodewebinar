@@ -30,6 +30,10 @@ export class MovieRepository implements IMovieRepository {
     return this.repository.findOneBy({ movieId });
   }
 
+  async getByTitle(title: string): Promise<IMovie | null> {
+    return this.repository.findOneBy({ title });
+  }
+
   async getAll(): Promise<IMovie[]> {
     return this.repository.find({
       order: {

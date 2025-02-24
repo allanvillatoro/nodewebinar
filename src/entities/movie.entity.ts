@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  BeforeInsert,
 } from 'typeorm';
 import { v7 as uuidv7 } from 'uuid';
 import { IMovie } from '../types/movie';
@@ -25,7 +24,7 @@ export class Movie {
   @PrimaryGeneratedColumn('uuid', { name: 'movie_id' })
   movieId: string;
 
-  @Column('text')
+  @Column('text', { unique: true })
   title: string;
 
   @Column('int', { nullable: true })
@@ -42,9 +41,4 @@ export class Movie {
 
   @UpdateDateColumn({ name: 'updated_date', type: 'timestamp' })
   updatedDate: Date;
-
-  @BeforeInsert()
-  generateUuid() {
-    this.movieId = uuidv7();
-  }
 }
