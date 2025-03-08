@@ -1,15 +1,14 @@
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Movie } from '../entities/movie.entity';
 import { IMovie, ITopFiveMovie } from '../types/movie';
-import { AppDataSource } from '../config/database';
 import { IMovieRepository } from '../types/movie.repository';
 import { NotFoundError } from '../types/error';
 
 export class MovieRepository implements IMovieRepository {
   private repository: Repository<Movie>;
 
-  constructor() {
-    this.repository = AppDataSource.getRepository(Movie);
+  constructor(dataSource: DataSource) {
+    this.repository = dataSource.getRepository(Movie);
   }
 
   async add(movieData: Partial<IMovie>): Promise<IMovie> {

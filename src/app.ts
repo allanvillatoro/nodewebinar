@@ -3,12 +3,15 @@ import cors from 'cors';
 import { StatusCodes } from 'http-status-codes';
 import { MovieRouter } from './routes/movie.routes';
 import errorMiddleware from './middlewares/errorMiddleware';
+import { IDataSource } from './types/datasource';
 
 class App {
   public app: Application;
   public baseUrl: string = '/api';
+  private dataSource: IDataSource;
 
-  constructor() {
+  constructor(dataSource: IDataSource) {
+    this.dataSource = dataSource;
     this.app = express();
     this.middleware();
     this.routes();
@@ -21,7 +24,7 @@ class App {
   }
 
   private routes() {
-    this.app.use(this.baseUrl, new MovieRouter().getRouter());
+    this.app.use(this.baseUrl, new MovieRouter(this.dataSource).getRouter());
     this.routes404();
   }
 
@@ -36,4 +39,4 @@ class App {
   }
 }
 
-export default new App().app;
+export default App;
