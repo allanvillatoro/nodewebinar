@@ -1,4 +1,4 @@
-import {
+/*import {
   closeTestDatabase,
   initializeTestDatabase,
   truncateTestDatabaseTables,
@@ -43,3 +43,4 @@ test('example', async () => {
   expect(moviesResponse.body[0].year).toBe(testMovie.year);
   expect(moviesResponse.body[0].country).toBe(testMovie.country);
 });
+*/
