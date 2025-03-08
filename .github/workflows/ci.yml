@@ -34,6 +34,12 @@ jobs:
       - name: Run tests
         run: npm run test:coverage
 
+      - name: Start test database
+        run: npm run testdb:up
+
+      - name: Run integration tests
+        run: npm run test:integration
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
