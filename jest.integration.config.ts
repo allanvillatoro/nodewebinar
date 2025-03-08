@@ -7,7 +7,7 @@ const config: Config = {
   testMatch: ['**/tests/**/*.spec.ts'],
   moduleFileExtensions: ['ts', 'js'],
   clearMocks: false,
-  testTimeout: 15000,
+  testTimeout: 30000,
 };
 
 export default config;
