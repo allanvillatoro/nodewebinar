@@ -39,8 +39,8 @@ jobs:
 
       - name: Run integration tests
         run: |
-            sleep 8
-            npm run test:integration
+          sleep 8
+          npm run test:integration
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@master
