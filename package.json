@@ -12,7 +12,7 @@
     "testdb:down": "docker compose -f docker-compose.test.yaml down -v",
     "test": "jest --config=jest.config.ts",
     "test:coverage": "jest --coverage --config=jest.config.ts",
-    "test:integration": "jest --config=jest.integration.config.ts",
+    "test:integration": "jest --runInBand --config=jest.integration.config.ts",
     "prettier": "prettier . --ignore-unknown",
     "prettier:check": "npm run prettier -- --check",
     "prettier:fix": "npm run prettier -- --write --list-different",
