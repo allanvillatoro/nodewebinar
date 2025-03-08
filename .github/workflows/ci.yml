@@ -35,7 +35,7 @@ jobs:
         run: npm run test:coverage
 
       - name: Start test database
-        run: npm run testdb:up
+        run: docker compose -f docker-compose.test.yaml up -d
 
       - name: Run integration tests
         run: npm run test:integration
