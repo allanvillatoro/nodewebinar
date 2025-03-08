@@ -64,7 +64,7 @@ export class MovieRepository implements IMovieRepository {
       title,
       year,
       country,
-      rating: parseFloat(rating),
+      rating: Math.round(parseFloat(rating) * 100) / 100,
     }));
   }
 }

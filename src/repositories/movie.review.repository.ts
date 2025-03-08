@@ -56,6 +56,8 @@ export class MovieReviewRepository implements IMovieReviewRepository {
       .select('AVG(review.rating)', 'average')
       .where('review.movieId = :movieId', { movieId })
       .getRawOne();
-    return result?.average ? parseFloat(result.average) : null;
+    return result?.average
+      ? Math.round(parseFloat(result.average) * 100) / 100
+      : null;
   }
 }
