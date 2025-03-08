@@ -1,11 +1,15 @@
-import { AppDataSource } from '../config/database';
+import { DataSource, Repository } from 'typeorm';
 import { MovieReview } from '../entities/movie.review.entity';
 import { NotFoundError } from '../types/error';
 import { IMovieReview } from '../types/movie.review';
 import { IMovieReviewRepository } from '../types/movie.review.repository';
 
 export class MovieReviewRepository implements IMovieReviewRepository {
-  private repository = AppDataSource.getRepository(MovieReview);
+  private repository: Repository<MovieReview>;
+
+  constructor(dataSource: DataSource) {
+    this.repository = dataSource.getRepository(MovieReview);
+  }
 
   async add(movieReviewData: Partial<IMovieReview>): Promise<IMovieReview> {
     return this.repository.save(new MovieReview(movieReviewData));

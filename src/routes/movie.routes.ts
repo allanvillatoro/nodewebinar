@@ -12,16 +12,21 @@ import {
   movieReviewPostSchema,
   movieReviewPutSchema,
 } from '../schemas/movie.schema';
+import { IDataSource } from '../types/datasource';
+import { DataSource } from 'typeorm';
 
 export class MovieRouter {
   private router: Router;
   private movieController: MovieController;
   private readonly baseRoute = '/movies';
 
-  constructor() {
+  constructor(dataSource: IDataSource) {
     this.router = Router();
     this.movieController = new MovieController(
-      new MovieManager(new MovieRepository(), new MovieReviewRepository()),
+      new MovieManager(
+        new MovieRepository(dataSource as DataSource),
+        new MovieReviewRepository(dataSource as DataSource),
+      ),
     );
     this.initializeRoutes();
   }

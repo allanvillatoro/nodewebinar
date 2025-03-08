@@ -1,10 +1,10 @@
-import app from './app';
+import App from './app';
 import dotenv from 'dotenv';
-import { initializeDatabase } from './config/database';
+import { AppDataSource, initializeDatabase } from './config/database';
 
 dotenv.config();
-
 const PORT = process.env.PORT || 3000;
+const app = new App(AppDataSource).app;
 
 const startServer = async () => {
   await initializeDatabase();
