@@ -37,8 +37,12 @@ $ npm run dev
 # unit tests
 $ npm run test
 
-# test coverage
+# unit test coverage
 $ npm run test:coverage
+
+# integration tests
+$ npm run testdb:up
+$ npm run test:integration
 ```
 
 [Check Unit Testing Handbook](./docs/UNIT_TESTS.md)
