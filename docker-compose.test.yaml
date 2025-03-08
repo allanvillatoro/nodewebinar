@@ -2,7 +2,7 @@ services:
   postgres_test:
     image: 'postgres:16'
     ports:
-      - '5433:5432' # Usa un puerto diferente
+      - '5433:5432'
     environment:
       - POSTGRES_DB=testdb
       - POSTGRES_PASSWORD=Secret1234
