@@ -29,28 +29,3 @@ export const initializeDatabase = async () => {
     //throw error;
   }
 };
-
-export const closeTestDatabase = async () => {
-  try {
-    await AppDataSource.destroy();
-    console.log('Database closed successfully');
-  } catch (error) {
-    console.error('Error during Data Source shut down', error);
-    //throw error;
-  }
-};
-
-export const truncateTestDatabaseTables = async () => {
-  try {
-    await AppDataSource.manager.query(
-      'TRUNCATE TABLE "movie_reviews" RESTART IDENTITY CASCADE',
-    );
-    await AppDataSource.manager.query(
-      'TRUNCATE TABLE "movies" RESTART IDENTITY CASCADE',
-    );
-    console.log('Database cleaned up successfully');
-  } catch (error) {
-    console.error('Error during Data Source clean up', error);
-    //throw error;
-  }
-};
