@@ -43,24 +43,18 @@ test('topfive', async () => {
   expect(moviesResponse.body.length).toBe(ratedMovieList.length);
 
   //Rate the movies
-  let ratings = [5, 3, 3, 5, 5]; //Avg: 4.2
-  await rateMovie(ratings, 'Pulp Fiction');
-
-  ratings = [5, 5, 5, 4, 5]; //Avg: 4.8
-  await rateMovie(ratings, 'The Dark Knight');
-
-  ratings = [5, 3, 4, 5, 5]; //Avg: 4.4
-  await rateMovie(ratings, 'Parasite');
-
-  ratings = [5, 3, 3, 2, 5]; //Avg: 3.6
-  await rateMovie(ratings, 'Mad Max: Fury Road');
-
-  ratings = [5, 3, 5, 5, 5]; //Avg: 4.6
-  await rateMovie(ratings, 'The Godfather');
-
-  ratings = [5, 3, 5, 2]; //Avg: 3.75
-  await rateMovie(ratings, 'All Quiet on the Western Front');
-
+  //Avg: 4.2
+  await rateMovie([5, 3, 3, 5, 5], 'Pulp Fiction');
+  //Avg: 4.8
+  await rateMovie([5, 5, 5, 4, 5], 'The Dark Knight');
+  //Avg: 4.4
+  await rateMovie([5, 3, 4, 5, 5], 'Parasite');
+  //Avg: 3.6
+  await rateMovie([5, 3, 3, 2, 5], 'Mad Max: Fury Road');
+  //Avg: 4.6
+  await rateMovie([5, 3, 5, 5, 5], 'The Godfather');
+  //Avg: 3.75
+  await rateMovie([5, 3, 5, 2], 'All Quiet on the Western Front');
   //The Shawshank Redemption does not have any ratings
 
   //Get the top five movies
@@ -109,7 +103,7 @@ async function rateMovie(ratings: number[], movieTitle: string) {
       body: {
         movieId: ratedMovieList.find((movie) => movie.title === movieTitle)
           ?.movieId,
-        rating: rating,
+        rating,
       },
     });
   }
