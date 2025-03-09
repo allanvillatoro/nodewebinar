@@ -14,5 +14,11 @@ export async function mockRequest({
   action: 'get' | 'post' | 'put' | 'delete';
   body?: Record<string, unknown>;
 }) {
-  return request(app)[action](path).send(body);
+  console.log(
+    `Calling ${action.toUpperCase()} ${path} ${body ? `with body: ${JSON.stringify(body)}` : ''}`,
+  );
+  const response = await request(app)[action](path).send(body);
+  console.log(`Response status: ${response.status}`);
+  console.log(`Response body: ${JSON.stringify(response.body)}`);
+  return response;
 }
