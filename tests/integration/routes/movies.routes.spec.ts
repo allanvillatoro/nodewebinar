@@ -61,7 +61,7 @@ test('topfive', async () => {
   ratings = [5, 3, 5, 2]; //Avg: 3.75
   await rateMovie(ratings, 'All Quiet on the Western Front');
 
-  //Mad Max: Fury Road does not have any rating
+  //The Shawshank Redemption does not have any ratings
 
   //Get the top five movies
   const topFiveResponse = await mockRequest({

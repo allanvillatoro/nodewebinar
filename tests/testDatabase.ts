@@ -32,7 +32,7 @@ export const closeTestDatabase = async () => {
     await testAppDataSource.destroy();
     console.log('Database closed successfully');
   } catch (error) {
-    console.error('Error during Data Source shut down', error);
+    console.error('Error during Data Source shutdown', error);
     //throw error;
   }
 };
@@ -47,7 +47,7 @@ export const truncateTestDatabaseTables = async () => {
     );
     console.log('Database cleaned up successfully');
   } catch (error) {
-    console.error('Error during Data Source clean up', error);
+    console.error('Error during Data Source cleanup', error);
     //throw error;
   }
 };
