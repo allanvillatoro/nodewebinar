@@ -8,6 +8,8 @@ export class MovieManager {
   private movieRepository: IMovieRepository;
   private movieReviewRepository: IMovieReviewRepository;
 
+  private name;
+
   constructor(
     movieRepository: IMovieRepository,
     movieReviewRepository: IMovieReviewRepository,
