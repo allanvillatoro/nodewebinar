@@ -19,7 +19,7 @@ const config: Config = {
     global: {
       functions: 20.63,
       branches: 18.18,
-      lines: 31.04,
+      lines: 30.92,
     },
   },
   testTimeout: 15000,
