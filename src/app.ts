@@ -9,7 +9,7 @@ class App {
   public app: Application;
   public baseUrl: string = '/api';
   private dataSource: IDataSource;
-  private name;
+  //private name;
 
   constructor(dataSource: IDataSource) {
     this.dataSource = dataSource;
