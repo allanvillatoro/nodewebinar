@@ -27,19 +27,21 @@ afterAll(async () => {
   await closeTestDatabase();
 });
 
-test('example', async () => {
-  //Add one movie
-  await mockRequest({ path: '/api/movies', action: 'post', body: testMovie });
+describe('movies', () => {
+  test('should save movie', async () => {
+    //Add one movie
+    await mockRequest({ path: '/api/movies', action: 'post', body: testMovie });
 
-  //Get the movies
-  const moviesResponse = await mockRequest({
-    path: '/api/movies',
-    action: 'get',
+    //Get the movies
+    const moviesResponse = await mockRequest({
+      path: '/api/movies',
+      action: 'get',
+    });
+
+    //Verify the movie was added
+    expect(moviesResponse.body.length).toBe(1);
+    expect(moviesResponse.body[0].title).toBe(testMovie.title);
+    expect(moviesResponse.body[0].year).toBe(testMovie.year);
+    expect(moviesResponse.body[0].country).toBe(testMovie.country);
   });
-
-  //Verify the movie was added
-  expect(moviesResponse.body.length).toBe(1);
-  expect(moviesResponse.body[0].title).toBe(testMovie.title);
-  expect(moviesResponse.body[0].year).toBe(testMovie.year);
-  expect(moviesResponse.body[0].country).toBe(testMovie.country);
 });
