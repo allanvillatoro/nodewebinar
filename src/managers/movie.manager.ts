@@ -8,7 +8,7 @@ export class MovieManager {
   private movieRepository: IMovieRepository;
   private movieReviewRepository: IMovieReviewRepository;
 
-  private name: string;
+  //private name: string;
 
   constructor(
     movieRepository: IMovieRepository,
