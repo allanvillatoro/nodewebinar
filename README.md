@@ -7,7 +7,7 @@ This project serves as a demonstration of best practices in modern Node.js and T
 - `Pre-commit Hooks` – Utilizing Husky to ensure code quality checks before commits.
 - `Testing Strategy` – Implementing both unit tests and integration tests to verify functionality.
 - `Continuous Integration` – Leveraging GitHub Actions to automate tests and quality checks on every push and pull request.
-- `Code Analysis with SonarQube` – Ensuring code reliability, security, and maintainability.
+- `Code Analysis with SonarCloud` – Ensuring code reliability, security, and maintainability.
 
 By integrating these tools and workflows, this project demonstrates how to build a robust, scalable, and well-tested Node.js application.
 
