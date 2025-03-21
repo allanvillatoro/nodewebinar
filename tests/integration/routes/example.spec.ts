@@ -5,6 +5,7 @@ import {
 } from '../../testDatabase';
 import { mockRequest } from '../../mockRequest';
 import { testMovie } from '../../fixtures/test.movie';
+import { IMovie } from '../../../src/types/movie';
 
 beforeAll(async () => {
   await initializeTestDatabase();
@@ -40,8 +41,9 @@ describe('movies', () => {
 
     //Verify the movie was added
     expect(moviesResponse.body.length).toBe(1);
-    expect(moviesResponse.body[0].title).toBe(testMovie.title);
-    expect(moviesResponse.body[0].year).toBe(testMovie.year);
-    expect(moviesResponse.body[0].country).toBe(testMovie.country);
+    const result: IMovie = moviesResponse.body[0];
+    expect(result.title).toBe(testMovie.title);
+    expect(result.year).toBe(testMovie.year);
+    expect(result.country).toBe(testMovie.country);
   });
 });
