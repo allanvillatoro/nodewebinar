@@ -1,20 +1,20 @@
 version: 2
 updates:
   # Keep npm dependencies updated
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     open-pull-requests-limit: 5
     labels:
-      - "dependencies"
+      - 'dependencies'
 
-  # Keep GitHub actions dependencies updated 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  # Keep GitHub actions dependencies updated
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     open-pull-requests-limit: 10
     labels:
-      - "github-actions"
-      - "dependencies"
+      - 'github-actions'
+      - 'dependencies'
