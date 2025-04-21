@@ -8,6 +8,8 @@ export class MovieManager {
   private movieRepository: IMovieRepository;
   private movieReviewRepository: IMovieReviewRepository;
 
+  //private name: string = null;
+
   constructor(
     movieRepository: IMovieRepository,
     movieReviewRepository: IMovieReviewRepository,
@@ -17,6 +19,8 @@ export class MovieManager {
   }
 
   async addMovie(movieData: Partial<IMovie>): Promise<IMovie> {
+    //const details : any = 'eslint';
+
     const foundMovie = await this.movieRepository.getByTitle(movieData.title!);
     if (foundMovie) {
       throw new ConflictError(`${movieData.title} movie already exists`);
